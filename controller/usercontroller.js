@@ -121,10 +121,10 @@ exports.view_order=async (req,res) => {
     var login_status=await storage.getItem('user_id')
 
     if(login_status!=undefined) {
-        var data=await regmodel.find({"email":req.body.email})
+        var data=await regmodel.find()
 
         if(data.length>0){
-            var get_order=await ordermodel.find({"email":data[0].email}) 
+            var get_order=await ordermodel.find({"email":req.body.email}) 
             
             if(get_order.length>0){
                 res.status(200).json({
@@ -186,7 +186,7 @@ exports.order_cancel=async(req,res)=>{
     }
     else{
     res.status(200).json({
-        status:"Please Login"
+        status:"Please Login" 
     })
 }
 }
